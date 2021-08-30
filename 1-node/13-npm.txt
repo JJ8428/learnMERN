@@ -1,0 +1,31 @@
+npm is integrated into your computer fs upon installing node.js
+
+To install pkg locally:
+npm i <pkg name>
+
+To install pkg globally:
+sudo npm install -g <pkg name>
+
+To install dev pkg:
+npm install <pkg name> -D
+
+To uninstall pkg:
+npm uninstall <pkg name>
+
+nodemon is a very useful package for developers
+This will let you work on your server without restarting it for every change
+
+package.json saves a record dependencies
+node_modules saves all dependencies
+
+To create it:
+npm init -y
+
+When doing source control, make sure to create a .gitignore file with '/node_modules'
+
+Within package.json, if you go to "scripts" and make it...
+"scripts": {
+    "start": "node app.js", // Change this to the ACTUAL app.js
+    "dev": "nodemon app.js",
+}
+... you can now start the project very quickly with just npm start/dev

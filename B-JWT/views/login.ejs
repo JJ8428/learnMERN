@@ -1,0 +1,54 @@
+<h3>Login</h3>
+<form>
+    <label for="email">Email: </label>
+    <input type="email" name="email" required>
+    <br>
+    <label for="password">Password: </label>
+    <input type="password" name="password">
+    <br><br>
+    <input type="submit" text="Login">
+    <div class="error_email"></div>
+    <div class="error_password"></div>
+</form>
+
+<script>
+    const form = document.querySelector('form');
+    const email_error_div = document.querySelector('.error_email');
+    const password_error_div = document.querySelector('.error_password');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Don't reload on submit
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+
+        // Reset Error
+        email_error_div.textContent = '';
+        password_error_div.textContent = '';
+        
+        try {
+            const res = await fetch('/login', {
+                method: 'POST',
+                body: JSON.stringify({
+                    email, password
+                }),
+                headers: {'Content-Type': 'application/json'}
+            });
+
+            const data = await res.json();
+            console.log('===');
+            console.log(data);
+            console.log('===');
+            if (data.error) { // Checking if data has a error property (data is a josn/dict)
+                email_error_div.textContent = data.error.email_err;
+                password_error_div.textContent = data.error.password_err;
+            }
+            if (data.user) {
+                location.assign('/words'); // Redirect to this link
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    });
+</script>

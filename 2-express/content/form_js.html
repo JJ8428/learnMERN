@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>form_js</title>
+    <!-- We have to tell the node.js what file to call for this link -->
+</head>
+<body>
+    <form>
+        <!-- Calls ./login using a POST method -->
+        <h3>Traditional Form with JS</h3>
+        <label for="name">Enter Name: </label>
+        <input type="text" name="name" id="name" class="form-input"/>
+        <!-- req.body in the POST method will contain an arg called name-->
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+    <hr>
+    <div class="result"></div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+        const result = document.querySelector('.result')
+
+        const fetchPeople = async () => {
+            try {
+                const { data } = await axios.get('/api/people') // Make a GET req for list of all names
+
+                const people = data.data.map((person) => {
+                return `<h5>${person.name}</h5>`
+                })
+                result.innerHTML = people.join('')
+            } catch (error) {
+                result.innerHTML = `<div class="alert alert-danger">Can't Fetch Data</div>`
+            }
+        }
+        fetchPeople()
+        // submit form
+        const btn = document.querySelector('.submit-btn')
+        const input = document.querySelector('.form-input')
+        
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault()
+            const nameValue = input.value
+
+            try {
+                const { data } = await axios.post('/api/people', { name: nameValue }) // This POST req only checks if a name was provided
+                const h5 = document.createElement('h5') 
+                h5.textContent = data.person
+                result.appendChild(h5) // Adds the name to the list of names, but this is appending to a isntance of a DB, not a 
+            } catch (error) {
+                console.log(error.response)
+            }
+            input.value = ''
+        })
+        
+    </script>
+</body>
+</html>
