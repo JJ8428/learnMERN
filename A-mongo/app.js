@@ -13,7 +13,7 @@ Steps to acquire this
 */
 // Make sure to fill it with your passoword where the url has <password>
 mongodb_url_orig = 'mongodb+srv://nsatti:<password>@cluster0.d5zo7.mongodb.net/node_blog?retryWrites=true&w=majority';
-mongodb_url = 'mongodb+srv://nsatti:Renualt88@cluster0.d5zo7.mongodb.net/node_blog?retryWrites=true&w=majority';
+
 mongoose.connect(mongodb_url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => {
         app.listen(5000);
