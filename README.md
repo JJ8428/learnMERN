@@ -37,4 +37,4 @@ To the content in Folders A and B, use the following to launch the code. Make su
 node app.js
 ```
 
-More to come...
+More to come, such as React.js so the 'R' in MERN can actually be said.
