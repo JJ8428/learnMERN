@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 app.use(cookieParser());
 
 // Set up the DB connection
-const db_URI = 'mongodb+srv://nsatti:Renualt88@cluster0.d5zo7.mongodb.net/node_word?retryWrites=true&w=majority';
+const db_URI = 'mongodb+srv://nsatti:<password>@cluster0.d5zo7.mongodb.net/node_word?retryWrites=true&w=majority';
 mongoose.connect(db_URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then((result) => {
         app.listen(5050);
